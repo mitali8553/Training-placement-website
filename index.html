@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Premium training and placement services for IT professionals"/>
+  <title>CareerPath - Training & Placement Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    /* Reset & Base Styles */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #4b5563;
+      --light: #f3f4f6;
+      --dark: #1f2937;
+      --success: #10b981;
+      --white: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s ease;
+      --radius: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--white);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav a {
+      color: var(--secondary);
+      font-weight: 500;
+      font-size: 16px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-dark);
+      color: var(--white);
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    /* Dropdown Menu */
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 45px;
+      left: -20px;
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      min-width: 220px;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li {
+      width: 100%;
+    }
+
+    .dropdown-menu li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      color: var(--secondary);
+      transition: var(--transition);
+    }
+
+    .dropdown-menu li a i {
+      color: var(--primary);
+      font-size: 18px;
+      width: 24px;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: rgba(37, 99, 235, 0.05);
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1900/1000') no-repeat center center/cover;
+      padding: 160px 0;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .cta-button {
+      background: var(--primary);
+      border: none;
+      padding: 15px 35px;
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+    }
+
+    .cta-button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Stats Section */
+    .stats {
+      margin-top: -50px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 40px 30px;
+      min-width: 250px;
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-icon {
+      background: rgba(37, 99, 235, 0.1);
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .card-icon i {
+      color: var(--primary);
+      font-size: 30px;
+    }
+
+    .card h2 {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .section-header p {
+      color: var(--secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-icon {
+      color: var(--primary);
+      font-size: 35px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .feature-card p {
+      color: var(--secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: var(--light);
+      padding: 80px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 40px;
+      height: 3px;
+      background: var(--primary);
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+
+    .footer-col p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--white);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--secondary);
+      }
+
+      nav ul {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--white);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        transition: 0.3s;
+        padding: 20px 0;
+        overflow-y: auto;
+      }
+
+      nav ul.active {
+        left: 0;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        padding: 15px 20px;
+        width: 100%;
+        display: block;
+      }
+
+      .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: transparent;
+        display: none;
+      }
+
+      .dropdown.active .dropdown-menu {
+        display: block;
+      }
+
+      .hero-content h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero {
+        padding: 120px 0;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .card {
+        width: 100%;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .cta-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        CareerPath
+      </a>
+      
+      <div class="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="dropdown">
+            <a href="courses.html"><i class="fas fa-laptop-code"></i> Courses <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="java-fullstack.html"><i class="fab fa-java"></i> Java Fullstack</a></li>
+              <li><a href="python.html"><i class="fab fa-python"></i> Python</a></li>
+              <li><a href="web-development.html"><i class="fas fa-code"></i> Web Development</a></li>
+              <li><a href="data-science.html"><i class="fas fa-chart-bar"></i> Data Science</a></li>
+              <li><a href="devops.html"><i class="fas fa-server"></i> DevOps</a></li>
+              <li><a href="cybersecurity.html"><i class="fas fa-shield-alt"></i> Cybersecurity</a></li>
+              <li><a href="cloud-computing.html"><i class="fas fa-cloud"></i> Cloud Computing</a></li>
+            </ul>
+          </li>
+          <li><a href="services.html"><i class="fas fa-cogs"></i> Services</a></li>
+          <li><a href="placements.html"><i class="fas fa-briefcase"></i> Placements</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Transform Your Career with Industry-Leading Training</h1>
+      <p>Get trained by industry experts and land your dream job with our premium placement services. Join 50,000+ successful graduates worldwide.</p>
+      <button class="cta-button">Explore Programs</button>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <h2>100K+</h2>
+        <p>Interview Calls</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-user-tie"></i>
+        </div>
+        <h2>50K+</h2>
+        <p>Successful Placements</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h2>500+</h2>
+        <p>Hiring Partners</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h2>4.9</h2>
+        <p>Student Satisfaction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose CareerPath?</h2>
+        <p>Our comprehensive approach to IT training ensures you gain the skills employers actually need</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-chalkboard-teacher feature-icon"></i>
+          <h3>Industry Experts</h3>
+          <p>Learn from instructors with 10+ years of industry experience who bring real-world insights to the classroom.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-project-diagram feature-icon"></i>
+          <h3>Project-Based Learning</h3>
+          <p>Build an impressive portfolio with hands-on projects that simulate real workplace challenges.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-users feature-icon"></i>
+          <h3>Interview Preparation</h3>
+          <p>Mock interviews, resume building, and personalized feedback to ensure you're ready for the job market.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-globe feature-icon"></i>
+          <h3>Global Opportunities</h3>
+          <p>Our placement network spans across 20+ countries with top-tier companies in every tech sector.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-certificate feature-icon"></i>
+          <h3>Certification Support</h3>
+          <p>Guided preparation for industry-recognized certifications that boost your marketability.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-headset feature-icon"></i>
+          <h3>Lifetime Support</h3>
+          <p>Access to alumni network, job alerts, and skill updates even after course completion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>About Us</h4>
+          <p>CareerPath is a leading training and placement organization with a mission to bridge the skills gap in the technology sector.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Courses</h4>
+          <ul>
+            <li><a href="java-fullstack.html">Java Fullstack</a></li>
+            <li><a href="python.html">Python</a></li>
+            <li><a href="web-development.html">Web Development</a></li>
+            <li><a href="data-science.html">Data Science</a></li>
+            <li><a href="cloud-computing.html">Cloud Computing</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Tech Park, Silicon Valley</li>
+            <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+            <li><i class="fas fa-envelope"></i> info@careerpath.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 CareerPath. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.mobile-toggle').addEventListener('click', function() {
+      document.querySelector('nav ul').classList.toggle('active');
+    });
+    
+    // For mobile dropdown
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('click', function(e) {
+        // Check if on mobile
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.classList.toggle('active');
+        }
+      });
+    });
+    
+    // Statistics animation
+    const statsSection = document.querySelector('.stats');
+    const numbers = document.querySelectorAll('.card h2');
+    
+    let animated = false;
+    
+    function animateNumbers() {
+      if (animated) return;
+      
+      const finalValues = [100, 50, 500, 4.9];
+      const duration = 2000;
+      const frameRate = 1000 / 60;
+      const framesTotalCount = duration / frameRate;
+      
+      numbers.forEach((number, index) => {
+        const finalValue = finalValues[index];
+        const increment = finalValue / framesTotalCount;
+        let currentValue = 0;
+        
+        const counter = setInterval(() => {
+          currentValue += increment;
+          
+          if (currentValue >= finalValue) {
+            currentValue = finalValue;
+            clearInterval(counter);
+          }
+          
+          if (index === 3) {
+            // For decimal number (4.9)
+            number.textContent = currentValue.toFixed(1);
+          } else {
+            number.textContent = Math.floor(currentValue) + 'K+';
+          }
+        }, frameRate);
+      });
+      
+      animated = true;
+    }
+    
+    // Check if element is in viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      );
+    }
+    
+    // Run animation when stats section is in viewport
+    document.addEventListener('scroll', function() {
+      if (isInViewport(statsSection)) {
+        animateNumbers();
+      }
+    });
+    
+    // Check on page load
+    if (isInViewport(statsSection)) {
+      animateNumbers();
+    }
+  </script>
+</body>
+</html>
